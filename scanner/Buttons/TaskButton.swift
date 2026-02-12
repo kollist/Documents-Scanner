@@ -1,6 +1,6 @@
 //
 //  TaskButton.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -20,8 +20,8 @@ struct TaskButton: View {
 				.fill(
 					LinearGradient(
 						colors: [
-							Color(hex: 0x868f96),
-							Color(hex: 0x596164)],
+							AppPalette.accentAlt,
+							AppPalette.ink],
 						startPoint: .bottomLeading,
 						endPoint: .topTrailing)
 				)
@@ -35,7 +35,7 @@ struct TaskButton: View {
 					.frame(width: 50)
 				
 				Text(caption)
-					.font(.caption)
+					.font(.custom("Georgia", size: 12))
 					.lineLimit(1)
 			}
 			.padding(8)
@@ -61,20 +61,20 @@ struct TransparentTaskButton: View {
 			VStack(spacing: 4) {
 				Image(systemName: image)
 					.symbolRenderingMode(.palette)
-					.foregroundStyle(blackForeground ? Color.black : Color.primary, multicolor ? Color.yellow : blackForeground ? Color.black : Color.primary)
+					.foregroundStyle(blackForeground ? AppPalette.ink : AppPalette.ink, multicolor ? AppPalette.glow : blackForeground ? AppPalette.ink : AppPalette.ink)
 					.font(.system(size: 40, weight: .light))
 					.frame(maxHeight: .infinity)
 					.frame(width: 50)
 				
 				if caption != "" {
 					Text(caption)
-						.font(.system(size: 14))
+						.font(.custom("Georgia", size: 13))
 						.lineLimit(1)
 				}
 			}
 			.padding(8)
 		}
-		.foregroundColor(Color.black)
+		.foregroundColor(AppPalette.ink)
 		.frame(width: caption == "" ? nil : 80, height: caption == "" ? nil : 80)
 	}
 }
@@ -95,20 +95,20 @@ struct TaskToggleButton: View {
 			VStack(spacing: 8) {
 				Image(systemName: image)
 					.symbolRenderingMode(.palette)
-					.foregroundStyle(Color.black, active ? Color.yellow.opacity(0) : Color.yellow)
+					.foregroundStyle(AppPalette.ink, active ? AppPalette.glow.opacity(0) : AppPalette.glow)
 					.font(.system(size: 40, weight: .light))
 					.frame(maxHeight: .infinity)
 					.frame(width: 50)
 				
 				if caption != "" {
 					Text(caption)
-						.font(.caption)
+						.font(.custom("Georgia", size: 12))
 						.lineLimit(1)
 				}
 			}
 			.padding(8)
 		}
-		.foregroundColor(Color.black)
+		.foregroundColor(AppPalette.ink)
 		.frame(width: 80, height: 80)
 	}
 }

@@ -1,6 +1,6 @@
 //
 //  OpenScannerButton.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -45,17 +45,15 @@ struct OpenScannerButton: View {
 				if geometry.size.width >= geometry.size.height {
 					Text(caption)
 						.font(.custom(
-							"Futura",
+							"AvenirNextCondensed-DemiBold",
 							fixedSize: geometry.size.height * 0.25))
-						.foregroundColor(.primary)
+						.foregroundColor(AppPalette.ink)
 						.bold()
-					if image != "" {
-						Image(systemName: image)
-							.resizable()
-							.scaledToFit()
-							.padding(24)
-							.foregroundColor(.white)
-					}
+                    Image(systemName: image)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(24)
+                        .foregroundColor(.white)
 				}
 			}
 			.overlay {
@@ -64,7 +62,7 @@ struct OpenScannerButton: View {
 						Image(systemName: "viewfinder")
 							.resizable()
 							.scaledToFill()
-							.foregroundColor(Color.yellow)
+							.foregroundColor(AppPalette.glow)
 							.frame(width: geometry.size.height / 2, alignment: .leading)
 							.clipped()
 						
@@ -77,7 +75,7 @@ struct OpenScannerButton: View {
 						Image(systemName: "viewfinder")
 							.resizable()
 							.scaledToFill()
-							.foregroundColor(Color.yellow)
+							.foregroundColor(AppPalette.glow)
 							.frame(width: geometry.size.height / 2, alignment: .trailing)
 							.clipped()
 					}

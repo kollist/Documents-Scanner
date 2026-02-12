@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -89,6 +89,7 @@ struct ContentView: View {
 						ignoresSafeAreaEdges: [.all]
 			)
 		}
+		.tint(AppPalette.accent)
 		.onAppear {
 			ScannerShortcuts.updateAppShortcutParameters()
 		}

@@ -1,6 +1,6 @@
 //
 //  InfoButton.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //

@@ -1,6 +1,6 @@
 //
 //  ViewExtensions.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -29,11 +29,25 @@ public extension Color {
 	}
 }
 
+enum AppPalette {
+	static let bgTop = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.10, green: 0.12, blue: 0.16, alpha: 1) : UIColor(red: 0.96, green: 0.95, blue: 0.91, alpha: 1) })
+	static let bgBottom = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.08, green: 0.09, blue: 0.12, alpha: 1) : UIColor(red: 0.90, green: 0.93, blue: 0.96, alpha: 1) })
+	static let accent = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.95, green: 0.58, blue: 0.45, alpha: 1) : UIColor(red: 0.88, green: 0.48, blue: 0.37, alpha: 1) })
+	static let accentAlt = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.47, green: 0.66, blue: 0.90, alpha: 1) : UIColor(red: 0.24, green: 0.35, blue: 0.50, alpha: 1) })
+	static let ink = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.93, green: 0.94, blue: 0.96, alpha: 1) : UIColor(red: 0.12, green: 0.16, blue: 0.22, alpha: 1) })
+	static let muted = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.68, green: 0.72, blue: 0.80, alpha: 1) : UIColor(red: 0.42, green: 0.45, blue: 0.50, alpha: 1) })
+	static let glow = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.97, green: 0.85, blue: 0.55, alpha: 1) : UIColor(red: 0.95, green: 0.80, blue: 0.56, alpha: 1) })
+	static let card = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.16, green: 0.18, blue: 0.23, alpha: 0.92) : UIColor(white: 1.0, alpha: 0.78) })
+	static let cardStrong = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.18, green: 0.20, blue: 0.26, alpha: 0.98) : UIColor(white: 1.0, alpha: 0.92) })
+	static let stroke = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(white: 1.0, alpha: 0.08) : UIColor(white: 0.0, alpha: 0.08) })
+	static let shadow = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(white: 0.0, alpha: 0.40) : UIColor(white: 0.0, alpha: 0.12) })
+}
+
 var DefaultBackgroundGradient: LinearGradient {
 	LinearGradient(
 		colors: [
-			Color("gradientMainTop"),
-			Color("gradientMainBottom")],
+			AppPalette.bgTop,
+			AppPalette.bgBottom],
 		startPoint: .topLeading,
 		endPoint: .bottomTrailing)
 	
@@ -261,6 +275,29 @@ extension View {
 	}
 }
 
+struct AppCardModifier: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.padding(14)
+			.background(
+				RoundedRectangle(cornerRadius: 18, style: .continuous)
+					.fill(AppPalette.card)
+					.overlay(
+						RoundedRectangle(cornerRadius: 18, style: .continuous)
+							.stroke(AppPalette.stroke, lineWidth: 1)
+					)
+					.shadow(color: AppPalette.shadow, radius: 12, x: 0, y: 8)
+			)
+	}
+}
+
+extension View {
+	@ViewBuilder
+	func appCard() -> some View {
+		self.modifier(AppCardModifier())
+	}
+}
+
 struct DataTagModifier: ViewModifier {
 	
 	func body(content: Content) -> some View {
@@ -269,7 +306,7 @@ struct DataTagModifier: ViewModifier {
 			.padding(.horizontal, 8)
 			.font(.system(size: 13))
 			.lineLimit(1)
-			.background(Capsule().fill(Color.white))
+			.background(Capsule().fill(AppPalette.cardStrong))
 		
 	}
 }

@@ -1,6 +1,6 @@
 //
 //  SmallGlyphButton.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -15,9 +15,9 @@ struct SmallGlyphButton: View {
 	var body: some View {
 		ZStack {
 			Circle()
-				.foregroundColor(Color.white)
+				.foregroundColor(AppPalette.cardStrong)
 			Circle()
-				.foregroundColor(destructive ? Color.red : Color.black)
+				.foregroundColor(destructive ? Color.red : AppPalette.ink)
 				.padding(2)
 			Image(systemName: systemImage)
 				.font(.system(size: 16))
@@ -48,13 +48,13 @@ struct SmallThumbnail: View {
 					.resizable()
 					.scaledToFill()
 					.frame(width: size.width, height: size.height)
-					.clipShape(RoundedRectangle(cornerRadius: 8))
+					.clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 				
 			}
-			RoundedRectangle(cornerRadius: 8)
+			RoundedRectangle(cornerRadius: 10, style: .continuous)
 				.stroke(borderColor, lineWidth: 2)
 		}
-		.foregroundColor(Color.primary)
+		.foregroundColor(AppPalette.ink)
 		.padding(2)
 		.frame(width: size.width, height: size.height)
 	}
@@ -75,22 +75,22 @@ struct CaptureThumbnail: View {
 					.resizable()
 					.scaledToFill()
 					.frame(width: rotate ? height : height * aspectRatio, height: rotate ? height * aspectRatio : height)
-					.clipShape(RoundedRectangle(cornerRadius: 4))
+					.clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 					.rotationEffect(Angle(degrees: rotate ? -90 : 0))
 			} else {
-				RoundedRectangle(cornerRadius: 4)
-					.fill(Color.gray)
-					.opacity(0.1)
+				RoundedRectangle(cornerRadius: 10, style: .continuous)
+					.fill(AppPalette.cardStrong)
+					.opacity(0.9)
 			}
 		}
 		.frame(width: height * aspectRatio, height: height)
-		.foregroundColor(Color.primary)
+		.foregroundColor(AppPalette.ink)
 		.overlay(
-			RoundedRectangle(cornerRadius: 4)
-				.stroke(image != nil ? Color.white : Color.clear, lineWidth: 1)
+			RoundedRectangle(cornerRadius: 10, style: .continuous)
+				.stroke(image != nil ? Color.white.opacity(0.6) : Color.clear, lineWidth: 1)
 		)
 		.frame(height: height)
-		.shadow(radius: 6)
+		.shadow(color: AppPalette.shadow, radius: 10, x: 0, y: 6)
 	}
 	
 	var height: CGFloat {

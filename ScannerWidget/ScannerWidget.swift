@@ -32,7 +32,7 @@ struct ClassicScanWidget: Widget {
 				.widgetURL(URL(string: "openscanner://scan/classic"))
 		}
 		.configurationDisplayName("Document Scanner")
-		.description("Open Scanner widget - Document Scanner")
+		.description("Scan IT widget - Document Scanner")
 		.supportedFamilies([.systemSmall, .accessoryCircular])
 	}
 }

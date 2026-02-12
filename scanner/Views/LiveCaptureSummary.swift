@@ -1,6 +1,6 @@
 //
 //  LiveCaptureSummary.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -45,6 +45,7 @@ struct LiveCaptureSummary: View {
 					.frame(height: 1)
 			}
 		}
+		.appCard()
 	}
 	
 	var listOfRecognizedItems: some View {

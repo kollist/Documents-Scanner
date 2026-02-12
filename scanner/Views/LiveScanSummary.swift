@@ -29,7 +29,7 @@ struct LiveScanSummary: View {
 	// Set last review prompt date default to a year ago, for new installs
 	@AppStorage("lastReviewPrompt") private var lastReviewPrompt: Date = Date().addingTimeInterval(TimeInterval(-365*24*60*60))
 	
-	@State var backgroundGradient = LinearGradient(colors: [Color(hex: 0xf2fbff), Color(hex: 0xe2ebf0)], startPoint: .top, endPoint: .bottom)
+	@State var backgroundGradient = LinearGradient(colors: [AppPalette.bgTop, AppPalette.bgBottom], startPoint: .top, endPoint: .bottom)
 	
 	var body: some View {
 		ZStack {
@@ -60,6 +60,7 @@ struct LiveScanSummary: View {
 						Button { AppState.shared.openScan = nil } label: {
 							Label("Scans", systemImage: "chevron.left")
 								.labelStyle(.titleAndIcon)
+								.foregroundColor(AppPalette.ink)
 						}
 					}
 				},
@@ -83,10 +84,10 @@ struct LiveScanSummary: View {
 					} label: {
 						Label( "Map", systemImage: "location.square")
 							.labelStyle(.iconOnly)
-							.foregroundColor(showMap ? Color.white : Color.primary)
+							.foregroundColor(showMap ? Color.white : AppPalette.ink)
 							.background(
 								RoundedRectangle(cornerRadius: 4)
-									.fill(showMap ? Color.accent : Color.clear)
+									.fill(showMap ? AppPalette.accent : Color.clear)
 									.padding(-4)
 							)
 					}
@@ -95,7 +96,7 @@ struct LiveScanSummary: View {
 					Button { showTimeline.toggle() } label: {
 						Label( showTimeline ? "Timeline" : "Images", systemImage: showTimeline ? "square.fill.text.grid.1x2" : "square.text.square")
 							.labelStyle(.iconOnly)
-							.foregroundColor(Color.primary)
+							.foregroundColor(AppPalette.ink)
 					}
 					.accessibilityLabel(showTimeline ? "Showing scan timeline" : "Showing scan pages")
 					
@@ -118,7 +119,7 @@ struct LiveScanSummary: View {
 					} label: {
 						Label("Share", systemImage: "square.and.arrow.up")
 							.labelStyle(.titleAndIcon)
-							.foregroundColor(Color.primary)
+							.foregroundColor(AppPalette.ink)
 					}
 					
 				}
@@ -292,21 +293,21 @@ struct LiveScanSummary: View {
 				.resizable()
 				.scaledToFill()
 				.frame(width: 300, height: 300 * (4/3))
-				.clipShape(RoundedRectangle(cornerRadius: 4))
-				.shadow(radius: 6)
+				.clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+				.shadow(color: AppPalette.shadow, radius: 12, x: 0, y: 8)
 				.overlay(
 					// Page number
 					ZStack(alignment: .topTrailing) {
-						RoundedRectangle(cornerRadius: 4)
-							.stroke(Color.white, lineWidth: 1)
+						RoundedRectangle(cornerRadius: 16, style: .continuous)
+							.stroke(Color.white.opacity(0.6), lineWidth: 1)
 						Text("\(capture.order+1)")
 							.padding(8)
 							.background(
 								ZStack {
 									Circle()
-										.fill(Color.background)
+										.fill(AppPalette.cardStrong)
 									Circle()
-										.stroke(Color.primary, lineWidth: 1)
+										.stroke(AppPalette.stroke, lineWidth: 1)
 								}
 							)
 							.padding(.trailing, 6)
@@ -321,21 +322,21 @@ struct LiveScanSummary: View {
 				.resizable()
 				.scaledToFill()
 				.frame(width: 300, height: capture.thumbnail != nil ? 300 / capture.thumbnail!.aspectRatio : 300)
-				.clipShape(RoundedRectangle(cornerRadius: 4))
-				.shadow(radius: 6)
+				.clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+				.shadow(color: AppPalette.shadow, radius: 12, x: 0, y: 8)
 				.overlay(
 					// Page number
 					ZStack(alignment: .topTrailing) {
-						RoundedRectangle(cornerRadius: 4)
-							.stroke(Color.white, lineWidth: 1)
+						RoundedRectangle(cornerRadius: 16, style: .continuous)
+							.stroke(Color.white.opacity(0.6), lineWidth: 1)
 						Text("\(capture.order+1)")
 							.padding(8)
 							.background(
 								ZStack {
 									Circle()
-										.fill(Color.background)
+										.fill(AppPalette.cardStrong)
 									Circle()
-										.stroke(Color.primary, lineWidth: 1)
+										.stroke(AppPalette.stroke, lineWidth: 1)
 								}
 							)
 							.padding(.top, 2)
@@ -348,16 +349,9 @@ struct LiveScanSummary: View {
 	var scanTitle: some View {
 		HStack {
 			TextField("Scan title", text: $titleValue)
-				.font(.title3)
-				.background(
-					ZStack(alignment: .bottom) {
-						Color.clear
-						Rectangle()
-							.fill(Color.primary.opacity(0.2))
-							.frame(height: 1)
-					}
-				)
-				.padding(.vertical)
+				.font(.custom("AvenirNextCondensed-DemiBold", size: 22))
+				.foregroundColor(AppPalette.ink)
+				.padding(.vertical, 6)
 			
 			if scan.title != titleValue {
 				Button {
@@ -365,16 +359,19 @@ struct LiveScanSummary: View {
 					saveContext()
 				} label: {
 					Text("Save")
+						.font(.custom("Georgia", size: 12))
 						.foregroundColor(Color.white)
+						.padding(.horizontal, 10)
+						.padding(.vertical, 6)
 						.background(
-							RoundedRectangle(cornerRadius: 4)
-								.fill(Color.accent)
-								.padding(-4)
+							Capsule()
+								.fill(AppPalette.accent)
 						)
 				}
 				.padding(.trailing, 4)
 			}
 		}
+		.appCard()
 	}
 	
 	

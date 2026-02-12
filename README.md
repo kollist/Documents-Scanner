@@ -1,6 +1,6 @@
 # Open Scanner
 
-Open Scanner is a fast, free document scanning app for iPhone. You can [download it from the App Store](https://apps.apple.com/app/id6578414558).
+Open Scanner is a fast, free document scanning app for iPhone.
 
 ## About the app
 
@@ -27,11 +27,11 @@ Open Scanner will prompt you for the following permissions:
 
 ### What data does Open Scanner collect?
 
-Please see [Open Scanner's privacy policy](https://openscanner.app/#privacy).
+Please see the app's privacy policy.
 
 ### Who made Open Scanner?
 
-[Pencil Research](https://pencilresearch.com).
+The Scanner team.
 
 ## About this project
 
@@ -41,4 +41,4 @@ Open Scanner is written in Swift and built with SwiftUI. It uses Core Data for d
 
 Contributions to the project, either as issues or pull requests, are welcome.
 
-The version numbers in [Releases](https://github.com/pencilresearch/OpenScanner/releases) correspond to the version numbers in Open Scanner's App Store listing.
+The version numbers in Releases correspond to the version numbers in the App Store listing.

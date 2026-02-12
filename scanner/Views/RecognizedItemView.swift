@@ -38,7 +38,7 @@ struct RecognizedItemView: View {
 							ZStack(alignment: .leading) {
 								Color.clear
 								Capsule()
-									.fill(showingMenuFor == item ? Color.accent : Color.yellow)
+									.fill(showingMenuFor == item ? AppPalette.accent : AppPalette.glow)
 									.frame(width: 4)
 							}
 						)
@@ -104,16 +104,16 @@ struct RecognizedItemView: View {
 		Text(item.transcript ?? "")
 			.padding(.leading, 12)
 			.lineLimit(10)
-			.foregroundColor(readOnly ? Color.white : Color.primary)
+			.foregroundColor(AppPalette.ink)
 			.background(
 				ZStack(alignment: .leading) {
 					if showingMenuFor == item {
-						Color.accent.opacity(0.075)
+						AppPalette.accent.opacity(0.08)
 					} else {
 						Color.clear
 					}
 					Capsule()
-						.fill(showingMenuFor == item ? Color.accent : Color.yellow)
+						.fill(showingMenuFor == item ? AppPalette.accent : AppPalette.glow)
 						.frame(width: 4)
 				}
 			)
@@ -125,7 +125,7 @@ struct RecognizedItemView: View {
 			if let text = text {
 				
 				Image(systemName: image)
-					.foregroundStyle(readOnly ? Color.white : Color.primary, showingMenuFor == item ? Color.blue : Color.yellow)
+					.foregroundStyle(AppPalette.ink, showingMenuFor == item ? AppPalette.accentAlt : AppPalette.glow)
 					.font(.system(size: 22))
 				Text(try! AttributedString(
 					markdown: markdownString(text, schema: schema),
@@ -133,7 +133,7 @@ struct RecognizedItemView: View {
 				.dataTagModifier()
 			}
 		}
-		.foregroundColor(readOnly ? Color.white : Color.primary)
+		.foregroundColor(AppPalette.ink)
 		.padding(.top, 8)
 	}
 	
@@ -182,7 +182,7 @@ struct SummaryContextButton: View {
 			
 			Text(caption)
 				.font(.system(size: 13))
-				.foregroundColor(Color.primary)
+				.foregroundColor(AppPalette.ink)
 			
 			Image(systemName: image)
 				.font(.system(size: 16))
@@ -192,7 +192,7 @@ struct SummaryContextButton: View {
 				.padding(.horizontal, 2)
 				.background(
 					RoundedRectangle(cornerRadius: 8, style: .continuous)
-						.fill(destructive ? Color.red : gray ? Color.gray : Color.accent)
+						.fill(destructive ? Color.red : gray ? Color.gray : AppPalette.accent)
 						.padding(.top, roundTop ? 8 : -8)
 						.padding(.bottom, roundBottom ? 8 : -8)
 				)

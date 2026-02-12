@@ -1,6 +1,6 @@
 //
 //  AppIntents.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ClassicScanIntent: AppIntent {
 	static var title: LocalizedStringResource = "Scan Document"
-	static var description = IntentDescription("Scan a document with Open Scanner")
+	static var description = IntentDescription("Scan a document with Scan It")
 	static var openAppWhenRun: Bool = true
 
 	@MainActor
@@ -22,14 +22,14 @@ struct ClassicScanIntent: AppIntent {
 }
 
 struct OpenAppIntent: AppIntent {
-	static var title: LocalizedStringResource = "Open Scanner"
-	static var description = IntentDescription("Run the Open Scanner app")
+	static var title: LocalizedStringResource = "Scan It"
+	static var description = IntentDescription("Run the Scan It app")
 	static var openAppWhenRun: Bool = true
 
 	@MainActor
 	func perform() async throws -> some IntentResult {
 		NavigationManager.shared.openApp()
-		return .result(dialog: "Okay, starting Open Scanner.")
+		return .result(dialog: "Okay, starting Scan It.")
 	}
 }
 
@@ -37,7 +37,6 @@ struct ScannerShortcuts: AppShortcutsProvider {
 	static var appShortcuts: [AppShortcut] {
 		
 		AppShortcut(intent: OpenAppIntent(), phrases: ["\(.applicationName)"], systemImageName: "viewfinder")
-		AppShortcut(intent: ClassicScanIntent(), phrases: ["Scan a document with Open Scanner", "Scan with \(.applicationName)"], systemImageName: "doc.viewfinder")
+		AppShortcut(intent: ClassicScanIntent(), phrases: ["Scan a document with \(.applicationName)", "Scan with \(.applicationName)"], systemImageName: "doc.viewfinder")
 	}
 }
-

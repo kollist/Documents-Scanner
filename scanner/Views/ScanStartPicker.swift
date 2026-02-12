@@ -1,6 +1,6 @@
 //
 //  ScanStartPicker.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -26,41 +26,40 @@ struct ScanStartPicker: View {
 		endPoint: .topTrailing)
 	
 	var body: some View {
-		VStack {
-			
-			if bottomBarExpanded {
-				Button { switchView(.Page) } label: {
-					TransparentTaskButton(caption: "Scan", image: "doc.viewfinder", blackForeground: true)
-				}
-				.padding(.vertical)
-				.transition(.scale)
-				.accessibilityLabel("Start a scan")
-			}
-			
-			Button { switchView(.Page) } label: {
-				ZStack {
-					Image(systemName: "plus.viewfinder")
-						.symbolRenderingMode(.palette)
-						.foregroundStyle(Color.black, Color.yellow)
-						.font(.system(size: 40, weight: .light))
-						.padding(16)
-				}
-			}
-			.accessibilityLabel("Start scanning")
-			
-		}
-		.background(
-			ZStack {
-				Capsule()
-					.fill(
-						Color.white
-							.shadow(.inner(color: Color.black.opacity(0.1), radius: 10))
+		Button { switchView(.Page) } label: {
+			HStack(spacing: 10) {
+				Image(systemName: "plus.viewfinder")
+					.symbolRenderingMode(.palette)
+					.foregroundStyle(AppPalette.ink, AppPalette.glow)
+					.font(.system(size: 22, weight: .semibold))
+					.padding(8)
+					.background(
+						Circle()
+							.fill(Color.white.opacity(0.9))
 					)
-				Capsule()
-					.stroke(Color.gray, lineWidth: 1)
+				Text("Scan")
+					.font(.custom("AvenirNextCondensed-DemiBold", size: 20))
+					.foregroundColor(AppPalette.ink)
+					.padding(.trailing, 8)
 			}
+			.padding(.horizontal, 12)
+			.padding(.vertical, 10)
+		}
+		.accessibilityLabel("Start scanning")
+		.background(
+			RoundedRectangle(cornerRadius: 22, style: .continuous)
+				.fill(
+					LinearGradient(
+						colors: [AppPalette.cardStrong, AppPalette.card],
+						startPoint: .topLeading,
+						endPoint: .bottomTrailing)
+				)
+				.overlay(
+					RoundedRectangle(cornerRadius: 22, style: .continuous)
+						.stroke(AppPalette.stroke, lineWidth: 1)
+				)
 		)
-		.clipShape(Capsule())
+		.shadow(color: AppPalette.shadow, radius: 12, x: 0, y: 8)
 	}
 	
 	func switchView(_ viewState: ViewState) {

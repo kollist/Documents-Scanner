@@ -1,6 +1,6 @@
 //
 //  AppState.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -21,12 +21,12 @@ enum ViewState: String {
 }
 
 extension ViewState: AppEnum {
-	static var typeDisplayRepresentation: TypeDisplayRepresentation = "Scanner mode"
+	static var typeDisplayRepresentation: TypeDisplayRepresentation = "Scan It mode"
 
 	static var caseDisplayRepresentations: [ViewState: DisplayRepresentation] = [
 		.Home: "Scan List",
 		.Page: "Scan Now",
-		.About: "About Open Scanner",
+		.About: "About Scan It",
 	]
 }
 

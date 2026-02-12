@@ -1,6 +1,6 @@
 //
 //  HomeView.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -74,7 +74,7 @@ struct HomeView: View {
 				HStack {
 				}
 		)
-		.ios16toolbarBackground(Color("gradientMainBottom"))
+		.ios16toolbarBackground(AppPalette.bgBottom)
 		.ignoresSafeArea(edges: .bottom)
 		.onChange(of: navigationManager.requestedClassicScan) { newValue in
 			if newValue {
@@ -90,6 +90,11 @@ struct HomeView: View {
 	
 	var listOfScans: some View {
 		List {
+			headerCard
+				.listRowBackground(Color.clear)
+				.listRowSeparator(.hidden)
+				.padding(.top, 4)
+			
 			ForEach (scans, id: \.self) { scan in
 				
 				if (searchText == "") || (scan.containsText(searchText)) {
@@ -196,16 +201,18 @@ struct HomeView: View {
 			HStack(alignment: .bottom, spacing: 4) {
 				if scan.fave {
 					Image(systemName: "star.fill")
-						.foregroundColor(Color.yellow)
+						.foregroundColor(AppPalette.glow)
 				}
 				Text(scan.title != nil && scan.title! != "" ? scan.title! : "Untitled")
 					.lineLimit(1)
+					.font(.custom("AvenirNextCondensed-DemiBold", size: 20))
+					.foregroundColor(AppPalette.ink)
 				Text(scan.timestamp!, style: .relative)
-					.font(.caption)
-					.opacity(0.5)
+					.font(.custom("Georgia", size: 12))
+					.foregroundColor(AppPalette.muted)
 			}
 		}
-		.padding(.vertical, 8)
+		.appCard()
 		.id(scan.lastUpdate)
 	}
 	
@@ -215,9 +222,28 @@ struct HomeView: View {
 			Spacer()
 			
 			ScanStartPicker()
-				.padding()
+				.padding(.trailing, 6)
 		}
-		.padding(.bottom, 8)
+		.padding(.bottom, 90)
+	}
+
+	var headerCard: some View {
+		VStack(alignment: .leading, spacing: 10) {
+			Text("Scans")
+				.font(.custom("AvenirNextCondensed-DemiBold", size: 36))
+				.foregroundColor(AppPalette.ink)
+			Text("Organized, searchable, and ready to share.")
+				.font(.custom("Georgia", size: 15))
+				.foregroundColor(AppPalette.muted)
+			
+			HStack(spacing: 12) {
+				Label("\(scans.count) items", systemImage: "tray.full")
+				Label("\(scans.filter { $0.fave }.count) favorites", systemImage: "star.fill")
+			}
+			.font(.custom("Georgia", size: 12))
+			.foregroundColor(AppPalette.ink.opacity(0.8))
+		}
+		.appCard()
 	}
 	
 	func moveItems(from source: IndexSet, to destination: Int) {

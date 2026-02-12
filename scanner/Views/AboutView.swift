@@ -1,8 +1,6 @@
 //
 //  AboutView.swift
-//  Open Scanner
-//
-//  Created by Slaven Radic on 2024-09-01.
+//  Scan IT
 //
 
 import SwiftUI
@@ -17,66 +15,55 @@ struct AboutView: View {
 	
 	var body: some View {
 		ZStack {
-			
-			VStack(alignment: .leading) {
-				HStack(spacing: 6) {
+			VStack(alignment: .leading, spacing: 16) {
+				HStack(spacing: 12) {
 					ZStack {
-						OpenScannerButton(caption: "OPEN", exactHeight: 80, justAppeared: $justAppeared)
-							.frame(width: 80, height: 80)
+                        OpenScannerButton(
+                            caption: "",
+                            image: "qrcode",
+                            exactHeight: 70,
+                            justAppeared: $justAppeared
+                        )
+							.frame(width: 70, height: 70)
 					}
 					
-					ZStack(alignment: .leading) {
-						Text("Scanner")
-							.font(.custom(
-								"AmericanTypewriter",
-								fixedSize: 30))
-						
-						ZStack (alignment: .bottomLeading) {
-							Color.clear
-							Text("Scan, Save, Sync.")
-
-						}
+					VStack(alignment: .leading, spacing: 4) {
+						Text("Scan It")
+							.font(.custom("AvenirNextCondensed-DemiBold", size: 30))
+							.foregroundColor(AppPalette.ink)
+						Text("Scan. Save. Sync.")
+							.font(.custom("Georgia", size: 14))
+							.foregroundColor(AppPalette.muted)
 					}
-					.frame(width: 180, height: 72)
 				}
-				.padding(.bottom)
-
 				
-				Text("✏️ Created by [Pencil Research](https://pencilresearch.com), home")
-					.padding(.bottom, 2)
-				Text("of [Penbook for iPad](https://penbook.app) and [Petey AI](https://petey.app).")
-					.padding(.bottom)
-
-				HStack {
-					VStack(alignment: .leading, spacing: 30) {
-						
-						
-						HStack {
-							Image(systemName: "ellipsis.bubble")
-							
-							Button {
-								UIApplication.shared.open(URL(string: "mailto:support@openscanner.app?subject=Open%20Scanner%20support%20request&body=\(AboutView.supportBody)")!,
-														  options: [:],
-														  completionHandler: nil)
-							} label: {
-								Text("Need help?")
-									.contentShape(Rectangle())
-							}
-						}
-						
-						Text("Made in 🇨🇦 on unceded Lekwungen, Musqueam, Stó:lō, Squamish, and Tsleil-Waututh lands.")
-
-						HStack(spacing: 0) {
-							
-							Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "•.•") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "•"))")
-							// Legal links
-							Text(" • [Privacy](https://openscanner.app/#privacy)")
-							
-						}
+				Text("Built for clean captures, quiet storage, and fast sharing.")
+					.font(.custom("Georgia", size: 15))
+					.foregroundColor(AppPalette.ink)
+				
+				HStack(spacing: 12) {
+					Image(systemName: "ellipsis.bubble")
+					Button {
+						UIApplication.shared.open(URL(string: "mailto:support@example.com?subject=Scan%20It%20support%20request&body=\(AboutView.supportBody)")!,
+												  options: [:],
+												  completionHandler: nil)
+					} label: {
+						Text("Need help?")
+							.font(.custom("Georgia", size: 14))
+							.contentShape(Rectangle())
 					}
 				}
+				.foregroundColor(AppPalette.accentAlt)
+				
+				HStack(spacing: 8) {
+					Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "•.•") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "•"))")
+					Text("•")
+					Text("Privacy Policy")
+				}
+				.font(.custom("Georgia", size: 12))
+				.foregroundColor(AppPalette.muted)
 			}
-			.font(.custom("AmericanTypewriter", fixedSize: 16))
+			.appCard()
 		}
 		.onAppear {
 			withAnimation(.easeOut(duration: 0.5)) {

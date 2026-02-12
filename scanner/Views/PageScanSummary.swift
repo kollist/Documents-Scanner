@@ -1,6 +1,6 @@
 //
 //  PageScanSummary.swift
-//  Open Scanner
+//  Scan IT
 //
 //  Created by Slaven Radic on 2024-09-01.
 //
@@ -23,7 +23,7 @@ struct PageScanSummary: View {
 	
 	@State private var titleValue = ""
 	
-	@State var backgroundGradient = LinearGradient(colors: [Color(hex: 0xf2fbff), Color(hex: 0xe2ebf0)], startPoint: .top, endPoint: .bottom)
+	@State var backgroundGradient = LinearGradient(colors: [AppPalette.bgTop, AppPalette.bgBottom], startPoint: .top, endPoint: .bottom)
 	
 	
 	var body: some View {
@@ -31,7 +31,7 @@ struct PageScanSummary: View {
 			
 			listOfCaptures
 				.scrollContentBackground(.hidden)
-				.toolbarBackground(Color("gradientMainBottom"), for: .navigationBar)
+				.toolbarBackground(AppPalette.bgBottom, for: .navigationBar)
 		}
 		.background(DefaultBackgroundGradient)
 		.navigationBarItems(
@@ -43,7 +43,7 @@ struct PageScanSummary: View {
 						} label: {
 							Label("Edit", systemImage: "chevron.up.chevron.down")
 								.labelStyle(.titleAndIcon)
-								.foregroundColor(Color.primary)
+						.foregroundColor(AppPalette.ink)
 						}
 						.foregroundColor(editMode == .active ? Color.white : Color.accent)
 						.padding(.trailing, 10)
@@ -55,7 +55,7 @@ struct PageScanSummary: View {
 						Button { shareSheet() } label: {
 							Label("Share", systemImage: "square.and.arrow.up")
 								.labelStyle(.titleAndIcon)
-								.foregroundColor(Color.primary)
+								.foregroundColor(AppPalette.ink)
 						}
 					}
 				}
@@ -99,14 +99,16 @@ struct PageScanSummary: View {
 			SmallThumbnail(image: capture.thumbnail)
 			VStack(alignment: .leading, spacing: 8) {
 				Text("Page \(capture.order + 1)")
-					.bold()
+					.font(.custom("AvenirNextCondensed-DemiBold", size: 18))
+					.foregroundColor(AppPalette.ink)
 				Text(capture.textPreview)
-					.font(.caption)
-					.italic()
+					.font(.custom("Georgia", size: 12))
+					.foregroundColor(AppPalette.muted)
 					.lineLimit(2)
 			}
 			.padding(8)
 		}
+		.appCard()
 		
 	}
 	
@@ -115,6 +117,10 @@ struct PageScanSummary: View {
 			.onChange(of: titleValue, perform: { changed in
 				scan.title = changed
 			})
+			.font(.custom("AvenirNextCondensed-DemiBold", size: 22))
+			.foregroundColor(AppPalette.ink)
+			.padding(.vertical, 6)
+			.appCard()
 	}
 	
 	func close() {
