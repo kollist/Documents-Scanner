@@ -20,7 +20,7 @@ struct AboutView: View {
 					ZStack {
                         OpenScannerButton(
                             caption: "",
-                            image: "qrcode",
+                            image: "scanner.fill",
                             exactHeight: 70,
                             justAppeared: $justAppeared
                         )
@@ -56,7 +56,7 @@ struct AboutView: View {
 				.foregroundColor(AppPalette.accentAlt)
 				
 				HStack(spacing: 8) {
-					Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "•.•") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "•"))")
+					Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "•.•")")
 					Text("•")
 					Text("Privacy Policy")
 				}

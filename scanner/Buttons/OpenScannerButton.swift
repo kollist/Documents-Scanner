@@ -53,7 +53,7 @@ struct OpenScannerButton: View {
                         .resizable()
                         .scaledToFit()
                         .padding(24)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
 				}
 			}
 			.overlay {
@@ -62,7 +62,7 @@ struct OpenScannerButton: View {
 						Image(systemName: "viewfinder")
 							.resizable()
 							.scaledToFill()
-							.foregroundColor(AppPalette.glow)
+							.foregroundColor(Color.primary)
 							.frame(width: geometry.size.height / 2, alignment: .leading)
 							.clipped()
 						
@@ -75,7 +75,7 @@ struct OpenScannerButton: View {
 						Image(systemName: "viewfinder")
 							.resizable()
 							.scaledToFill()
-							.foregroundColor(AppPalette.glow)
+							.foregroundColor(Color.primary)
 							.frame(width: geometry.size.height / 2, alignment: .trailing)
 							.clipped()
 					}

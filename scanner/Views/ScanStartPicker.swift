@@ -30,7 +30,7 @@ struct ScanStartPicker: View {
 			HStack(spacing: 10) {
 				Image(systemName: "plus.viewfinder")
 					.symbolRenderingMode(.palette)
-					.foregroundStyle(AppPalette.ink, AppPalette.glow)
+					.foregroundStyle(Color.black, Color.black)
 					.font(.system(size: 22, weight: .semibold))
 					.padding(8)
 					.background(
@@ -39,7 +39,7 @@ struct ScanStartPicker: View {
 					)
 				Text("Scan")
 					.font(.custom("AvenirNextCondensed-DemiBold", size: 20))
-					.foregroundColor(AppPalette.ink)
+					.foregroundColor(Color.black)
 					.padding(.trailing, 8)
 			}
 			.padding(.horizontal, 12)
