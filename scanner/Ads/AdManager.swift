@@ -11,14 +11,18 @@ enum AdConstants {
 final class AdManager: NSObject, FullScreenContentDelegate {
 	static let shared = AdManager()
 	
-    private var interstitial: InterstitialAd?
+	private var interstitial: InterstitialAd?
 	private var isLoading = false
 	private var pendingShow = false
-	private var launchCompletion: (() -> Void)?
+	private var blockingCompletions: [() -> Void] = []
 	private var launchTimeoutWorkItem: DispatchWorkItem?
 	
 	func start() {
         MobileAds.shared.start(completionHandler: nil)
+		loadInterstitialIfNeeded()
+	}
+
+	func preloadInterstitial() {
 		loadInterstitialIfNeeded()
 	}
 	
@@ -61,24 +65,25 @@ final class AdManager: NSObject, FullScreenContentDelegate {
         interstitial.present(from: root)
 	}
 
-	func showLaunchInterstitial(blockingTimeout: TimeInterval = 3.0, completion: @escaping () -> Void) {
-		launchCompletion = completion
+	func showBlockingInterstitial(blockingTimeout: TimeInterval = 3.0, completion: @escaping () -> Void) {
+		blockingCompletions.append(completion)
 		pendingShow = true
 		loadInterstitialIfNeeded()
-		let workItem = DispatchWorkItem { [weak self] in
-			self?.finishLaunchIfNeeded()
+		if launchTimeoutWorkItem == nil {
+			let workItem = DispatchWorkItem { [weak self] in
+				self?.finishLaunchIfNeeded()
+			}
+			launchTimeoutWorkItem = workItem
+			DispatchQueue.main.asyncAfter(deadline: .now() + blockingTimeout, execute: workItem)
 		}
-		launchTimeoutWorkItem = workItem
-		DispatchQueue.main.asyncAfter(deadline: .now() + blockingTimeout, execute: workItem)
 	}
 
 	private func finishLaunchIfNeeded() {
 		launchTimeoutWorkItem?.cancel()
 		launchTimeoutWorkItem = nil
-		if let completion = launchCompletion {
-			launchCompletion = nil
-			completion()
-		}
+		let completions = blockingCompletions
+		blockingCompletions.removeAll()
+		completions.forEach { $0() }
 	}
 	
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {

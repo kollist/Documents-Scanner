@@ -47,6 +47,9 @@ class AppState: ObservableObject {
 	@Published var openRecognizedItem: ScanRecognizedItem?
 	@Published var pendingInterstitialAfterScan = false
 	@Published var launchAdGateActive = false
+	@Published var scanAdGateActive = false
+	@AppStorage("scanOpenCount") var scanOpenCount = 0
+	@AppStorage("scanOpenAdEvery") var scanOpenAdEvery = 2
 	
 	private let speechSynthesizer = AVSpeechSynthesizer()
 	

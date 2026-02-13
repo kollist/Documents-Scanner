@@ -85,6 +85,7 @@ struct HomeView: View {
 			if AppState.shared.isSpeaking {
 				AppState.shared.stopSpeaking()
 			}
+			AdManager.shared.preloadInterstitial()
 		}
 	}
 	

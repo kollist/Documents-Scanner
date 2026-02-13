@@ -36,6 +36,7 @@ struct PageScan: View {
 	}
 	
 	func startScan() {
+		AdManager.shared.preloadInterstitial()
 		UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController?.present(
 			viewModel.getDocumentCameraViewController(),
 			animated: true,

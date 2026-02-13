@@ -31,8 +31,9 @@ extension CameraScanViewModel: VNDocumentCameraViewControllerDelegate {
 	
 	func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
 		controller.dismiss(animated: true) {
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-				AdManager.shared.showInterstitialIfReady()
+			AppState.shared.scanAdGateActive = true
+			AdManager.shared.showBlockingInterstitial { 
+				AppState.shared.scanAdGateActive = false
 			}
 		}
 	}

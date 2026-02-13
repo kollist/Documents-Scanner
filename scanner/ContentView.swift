@@ -92,7 +92,7 @@ struct ContentView: View {
 		}
 		.overlay(
 			Group {
-				if AppState.shared.launchAdGateActive {
+				if AppState.shared.launchAdGateActive || AppState.shared.scanAdGateActive {
 					ZStack {
 						Color.black.opacity(0.2).ignoresSafeArea()
 						ProgressView("Loading ad...")
@@ -108,10 +108,11 @@ struct ContentView: View {
 		.tint(AppPalette.accent)
 		.onAppear {
 			AdManager.shared.start()
+			AdManager.shared.preloadInterstitial()
 			if !didShowLaunchAdThisSession {
 				didShowLaunchAdThisSession = true
 				AppState.shared.launchAdGateActive = true
-				AdManager.shared.showLaunchInterstitial { 
+				AdManager.shared.showBlockingInterstitial { 
 					AppState.shared.launchAdGateActive = false
 				}
 			}

@@ -130,9 +130,10 @@ struct LiveScanSummary: View {
 	.onAppear {
 		titleValue = scan.title ?? ""
 		showTimeline = scan.isLive
-		if AppState.shared.pendingInterstitialAfterScan {
-			AppState.shared.pendingInterstitialAfterScan = false
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+		let newCount = AppState.shared.scanOpenCount + 1
+		AppState.shared.scanOpenCount = newCount
+		if newCount % AppState.shared.scanOpenAdEvery == 0 {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 				AdManager.shared.showInterstitialIfReady()
 			}
 		}
