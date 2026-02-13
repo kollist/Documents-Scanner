@@ -30,7 +30,11 @@ final class CameraScanViewModel: NSObject, ObservableObject {
 extension CameraScanViewModel: VNDocumentCameraViewControllerDelegate {
 	
 	func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-		controller.dismiss(animated: true, completion: nil)
+		controller.dismiss(animated: true) {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+				AdManager.shared.showInterstitialIfReady()
+			}
+		}
 	}
 	
 	func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
@@ -55,6 +59,9 @@ extension CameraScanViewModel: VNDocumentCameraViewControllerDelegate {
 		}
 		saveContext()
 		AppState.shared.requestReviewIfNecessary()
+		AppState.shared.openScan = self.scan
+		AppState.shared.pendingInterstitialAfterScan = true
+		AppState.shared.viewState = .Home
 		controller.dismiss(animated: true, completion: nil)
 	}
 	

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06AA4C932F3E9C1600FA978F /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA4C902F3E9C1600FA978F /* AdManager.swift */; };
+		06AA4C942F3E9C1600FA978F /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA4C912F3E9C1600FA978F /* BannerAdView.swift */; };
+		06AA4C972F3E9CB200FA978F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 06AA4C962F3E9CB200FA978F /* GoogleMobileAds */; };
 		A30439A128A317B0002DE651 /* PageScanSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30439A028A317B0002DE651 /* PageScanSummary.swift */; };
 		A30A91D1288A3AB800D8228B /* DataScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30A91D0288A3AB800D8228B /* DataScannerViewController.swift */; };
 		A30A91D5288DB6CA00D8228B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30A91D4288DB6CA00D8228B /* AppState.swift */; };
@@ -55,6 +58,8 @@
 		A3B9F73228AF021000EEDDFF /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B9F73128AF021000EEDDFF /* NavigationManager.swift */; };
 		A3DE6DD9289C303D00A7E740 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DE6DD8289C303D00A7E740 /* HomeView.swift */; };
 		A3DE6DDB289C365400A7E740 /* ScanStartPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DE6DDA289C365400A7E740 /* ScanStartPicker.swift */; };
+		A4AD0001E000000000000001 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A4AD0002E000000000000002 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +101,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		06AA4C902F3E9C1600FA978F /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
+		06AA4C912F3E9C1600FA978F /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 		A30439A028A317B0002DE651 /* PageScanSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageScanSummary.swift; sourceTree = "<group>"; };
 		A30A91D0288A3AB800D8228B /* DataScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerViewController.swift; sourceTree = "<group>"; };
 		A30A91D4288DB6CA00D8228B /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -150,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06AA4C972F3E9CB200FA978F /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +187,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06AA4C922F3E9C1600FA978F /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				06AA4C902F3E9C1600FA978F /* AdManager.swift */,
+				06AA4C912F3E9C1600FA978F /* BannerAdView.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		A30E5C81288A2FF40099985F = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +222,7 @@
 		A30E5C8C288A2FF40099985F /* scanner */ = {
 			isa = PBXGroup;
 			children = (
+				06AA4C922F3E9C1600FA978F /* Ads */,
 				A30E5C8D288A2FF40099985F /* scannerApp.swift */,
 				A30E5C94288A2FF40099985F /* ContentView.swift */,
 				A3B9F72F28AF007300EEDDFF /* AppIntents.swift */,
@@ -347,6 +365,7 @@
 			);
 			name = scanner;
 			packageProductDependencies = (
+				06AA4C962F3E9CB200FA978F /* GoogleMobileAds */,
 			);
 			productName = scanner;
 			productReference = A30E5C8A288A2FF40099985F /* scanner.app */;
@@ -441,6 +460,7 @@
 			);
 			mainGroup = A30E5C81288A2FF40099985F;
 			packageReferences = (
+				06AA4C952F3E9CB200FA978F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = A30E5C8B288A2FF40099985F /* Products */;
 			projectDirPath = "";
@@ -494,6 +514,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4AD0001E000000000000001 /* (null) in Sources */,
+				A4AD0002E000000000000002 /* (null) in Sources */,
 				A3B9F73228AF021000EEDDFF /* NavigationManager.swift in Sources */,
 				A30FC7432893BAA700C75CFB /* TaskButton.swift in Sources */,
 				A30FC7522895A22700C75CFB /* QuickLookController.swift in Sources */,
@@ -509,6 +531,8 @@
 				A30FC73B2892033000C75CFB /* LiveScanSummary.swift in Sources */,
 				A3DE6DD9289C303D00A7E740 /* HomeView.swift in Sources */,
 				A30A91D1288A3AB800D8228B /* DataScannerViewController.swift in Sources */,
+				06AA4C932F3E9C1600FA978F /* AdManager.swift in Sources */,
+				06AA4C942F3E9C1600FA978F /* BannerAdView.swift in Sources */,
 				A3233D3C28BC49B70088268F /* ScannerWidget.intentdefinition in Sources */,
 				A325C2C9288B8E9600E83CF6 /* OpenScannerButton.swift in Sources */,
 				A3A4F88C289DE36300986816 /* SmallGlyphButton.swift in Sources */,
@@ -970,6 +994,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		06AA4C952F3E9CB200FA978F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		06AA4C962F3E9CB200FA978F /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06AA4C952F3E9CB200FA978F /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		A30E5C91288A2FF40099985F /* scanner.xcdatamodeld */ = {

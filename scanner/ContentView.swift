@@ -11,6 +11,7 @@ import CoreData
 struct ContentView: View {
 	@Environment(\.managedObjectContext) private var viewContext
 	@StateObject var loading = AppState.shared
+	@State private var didShowLaunchAdThisSession = false
 	
 	@FetchRequest(
 		sortDescriptors: [NSSortDescriptor(keyPath: \Scan.order, ascending: false)],
@@ -89,8 +90,31 @@ struct ContentView: View {
 						ignoresSafeAreaEdges: [.all]
 			)
 		}
+		.overlay(
+			Group {
+				if AppState.shared.launchAdGateActive {
+					ZStack {
+						Color.black.opacity(0.2).ignoresSafeArea()
+						ProgressView("Loading ad...")
+							.padding(16)
+							.background(
+								RoundedRectangle(cornerRadius: 12, style: .continuous)
+									.fill(AppPalette.cardStrong)
+							)
+					}
+				}
+			}
+		)
 		.tint(AppPalette.accent)
 		.onAppear {
+			AdManager.shared.start()
+			if !didShowLaunchAdThisSession {
+				didShowLaunchAdThisSession = true
+				AppState.shared.launchAdGateActive = true
+				AdManager.shared.showLaunchInterstitial { 
+					AppState.shared.launchAdGateActive = false
+				}
+			}
 			ScannerShortcuts.updateAppShortcutParameters()
 		}
 	}

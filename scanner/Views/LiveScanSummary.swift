@@ -127,10 +127,16 @@ struct LiveScanSummary: View {
 		.iOSScrollDismissesKeyboard()
 		.navigationBarTitleDisplayMode(.inline)
 		.ignoresSafeArea(edges: .bottom)
-		.onAppear {
-			titleValue = scan.title ?? ""
-			showTimeline = scan.isLive
-			print(lastReviewPrompt)
+	.onAppear {
+		titleValue = scan.title ?? ""
+		showTimeline = scan.isLive
+		if AppState.shared.pendingInterstitialAfterScan {
+			AppState.shared.pendingInterstitialAfterScan = false
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+				AdManager.shared.showInterstitialIfReady()
+			}
+		}
+		print(lastReviewPrompt)
 			/// Prompt for review if more than 30 days passed since the last prompt
 			if lastReviewPrompt.addingTimeInterval(TimeInterval(30*24*60*60)) < Date() {
 				DispatchQueue.main.asyncAfter(deadline: .now() + 9) {

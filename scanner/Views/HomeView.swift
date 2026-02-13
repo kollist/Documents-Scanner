@@ -125,20 +125,25 @@ struct HomeView: View {
 			.onMove(perform: moveItems)
 			.listRowBackground(Color.clear)
 			.listRowSeparator(.hidden)
-			
+            
 			Spacer()
-				.frame(height: 40)
+				.frame(height: 8)
 				.listRowBackground(Color.clear)
 				.listRowSeparator(.hidden)
-			
+
 			if searchText == "" {
 				AboutView()
 					.listRowBackground(Color.clear)
 					.listRowSeparator(.hidden)
 					.padding(.top, 40)
-					.padding(.bottom, 100)
+					.padding(.bottom, 160)
 					.buttonStyle(.borderless)
 			}
+			
+			Spacer()
+				.frame(height: 40)
+				.listRowBackground(Color.clear)
+				.listRowSeparator(.hidden)
 			
 		}
 		.listStyle(.plain)
@@ -217,14 +222,19 @@ struct HomeView: View {
 	}
 	
 	var startScanBottomBar: some View {
-		HStack {
+		VStack(spacing: 18) {
+			HStack {
+				Spacer()
+				ScanStartPicker()
+					.padding(.trailing, 6)
+			}
 			
-			Spacer()
-			
-			ScanStartPicker()
-				.padding(.trailing, 6)
+			BannerAdView()
+				.frame(height: 50)
+				.appCard()
+				.padding(.horizontal, 16)
 		}
-		.padding(.bottom, 90)
+		.padding(.bottom, 80)
 	}
 
 	var headerCard: some View {
